@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,10 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.io.IOException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Fragment1 extends Fragment {
-    private ArrayList<UserInfo> information = new ArrayList<>();
+    public ArrayList<UserInfo> information = new ArrayList<>();
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,7 +33,6 @@ public class Fragment1 extends Fragment {
     public Fragment1() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -44,11 +48,11 @@ public class Fragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_1, container, false);
-        initData();
+        information.clear();
+        jsonParsing();
 
         Context context = view.getContext();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        recyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(), 1));
         recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
@@ -58,13 +62,57 @@ public class Fragment1 extends Fragment {
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(context, information);
         recyclerView.setAdapter(adapter);
         // Inflate the layout for this fragment
+
         return view;
     }
 
-    private void initData(){
-        information.clear();
-        information.add(new UserInfo("정세진", "010-1111-1111", R.drawable.image1));
-        information.add(new UserInfo("정세진2", "010-1111-1111", R.drawable.image2));
-        information.add(new UserInfo("정세진3", "010-1111-1111", R.drawable.image3));
+
+    public ArrayList<UserInfo> jsonParsing()
+    {
+        String json="";
+        try {
+            InputStream is = getActivity().getAssets().open("user.json");
+            int fileSize = is.available();
+
+            byte[] buffer = new byte[fileSize];
+            is.read(buffer);
+            is.close();
+
+            json = new String(buffer, "UTF-8");
+        }
+        catch (IOException ex)
+        {
+            ex.printStackTrace();
+        }
+
+        try{
+            JSONObject jsonObject = new JSONObject(json);
+            JSONArray pArray = jsonObject.getJSONArray("info");
+
+            for(int i=0; i<pArray.length(); i++)
+            {
+                JSONObject pObject = pArray.getJSONObject(i);
+                UserInfo user = new UserInfo(pObject.getString("name"),pObject.getString("pn"), R.drawable.image1);
+                information.add(user);
+            }
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return information;
     }
+
+
+
+    /*private void initData(){
+        information.clear();
+        //information: ArrayList<userinfo>
+
+        information.add(new UserInfo("이채영", "010-1111-1111", R.drawable.image1));
+        information.add(new UserInfo("정세진", "010-1111-1111", R.drawable.image2));
+        information.add(new UserInfo("정세진", "010-1111-1111", R.drawable.image3));
+    }
+    */
+
+
+
 }
