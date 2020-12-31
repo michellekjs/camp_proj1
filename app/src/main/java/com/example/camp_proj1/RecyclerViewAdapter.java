@@ -2,6 +2,7 @@ package com.example.camp_proj1;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
             number = (TextView) itemView.findViewById(R.id.user_number);
 
+
         }
     }
 
@@ -53,8 +55,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.name.setText(mPersons.get(position).name);
         holder.number.setText(mPersons.get(position).phoneNumber);
         holder.imageView.setImageResource(mPersons.get(position).getPhoto());
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+               // String name = mPersons.get(position).name;
 
+                Intent intent = new Intent(v.getContext(), RecyclerViewClickActivity.class);
 
+                intent.putExtra("clickviewtext", mPersons.get(position).name);
+                v.getContext().startActivity(intent);
+
+            }
+        });
 
     }
 

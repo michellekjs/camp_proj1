@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,6 +48,7 @@ public class Fragment1 extends Fragment {
 
         Context context = view.getContext();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(), 1));
         recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
@@ -62,7 +64,7 @@ public class Fragment1 extends Fragment {
     private void initData(){
         information.clear();
         information.add(new UserInfo("정세진", "010-1111-1111", R.drawable.image1));
-        information.add(new UserInfo("정세진", "010-1111-1111", R.drawable.image2));
-        information.add(new UserInfo("정세진", "010-1111-1111", R.drawable.image3));
+        information.add(new UserInfo("정세진2", "010-1111-1111", R.drawable.image2));
+        information.add(new UserInfo("정세진3", "010-1111-1111", R.drawable.image3));
     }
 }
