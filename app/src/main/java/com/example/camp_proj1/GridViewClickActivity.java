@@ -12,6 +12,10 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager.widget.ViewPager;import android.widget.GridLayout;
+import android.widget.ImageView;
+
+import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
 public class GridViewClickActivity extends AppCompatActivity {
@@ -20,11 +24,7 @@ public class GridViewClickActivity extends AppCompatActivity {
     private ViewPager mPager;
     ClickEventSliderAdapter adapter;
 
-import android.widget.GridLayout;
-import android.widget.ImageView;
 
-import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager.widget.ViewPager;
 
 
     @Override
