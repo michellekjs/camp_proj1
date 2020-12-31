@@ -7,9 +7,11 @@ import android.view.View;
 public class ImageClickListener implements View.OnClickListener{
     Context context;
     int imageID;
-    public ImageClickListener(Context context, int ImageID){
+    int[] imageIDlist;
+    public ImageClickListener(Context context, int ImageID, int[] list){
         this.context = context;
         this.imageID = ImageID;
+        this.imageIDlist = list;
     }
 
     public void onClick(View v){
