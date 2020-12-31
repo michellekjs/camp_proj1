@@ -48,6 +48,7 @@ public class GridViewAdapter extends BaseAdapter {
             imageView.setImageBitmap(bmp);
 
             ImageClickListener imageViewClickListener = new ImageClickListener(context, imageIDs[position], imageIDs);
+
             imageView.setOnClickListener(imageViewClickListener);
         }
         return imageView;

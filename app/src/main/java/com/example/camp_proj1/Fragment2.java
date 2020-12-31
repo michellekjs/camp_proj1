@@ -13,7 +13,8 @@ import android.widget.GridView;
 
 public class Fragment2 extends Fragment {
 
-    public int[] imageIDs = new int[]{
+
+    private int[] imageIDs = new int[]{
             R.drawable.image1,
             R.drawable.image2,
             R.drawable.image3,

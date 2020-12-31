@@ -4,25 +4,24 @@ public class UserInfo {
 
     String name;
     String phoneNumber;
+    String email;
     private int photo;
 
-    public UserInfo(String name, String number, int photo){
+    public UserInfo(String name, String number, String email, int photo){
         this.name = name;
         this.phoneNumber = number;
         this.photo = photo;
+        this.email = email;
     }
 
     public String getName(){
         return name;
     }
 
-    public String getPhoneNumber(){
-        return phoneNumber;
-    }
+    public String getEmail(){return email; }
 
-    public int getPhoto(){
-        return photo;
-    }
+    public String getPhoneNumber(){ return phoneNumber; }
 
+    public int getPhoto(){ return photo;}
 
 }

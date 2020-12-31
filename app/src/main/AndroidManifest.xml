@@ -20,7 +20,6 @@
         <activity android:name=".RecyclerViewClickActivity">
             
         </activity>
-
         <activity android:name=".GridViewClickActivity">
 
         </activity>

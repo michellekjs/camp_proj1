@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.io.IOException;
+import java.util.Random;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -84,15 +86,16 @@ public class Fragment1 extends Fragment {
         {
             ex.printStackTrace();
         }
-
         try{
             JSONObject jsonObject = new JSONObject(json);
             JSONArray pArray = jsonObject.getJSONArray("info");
+            int[] images = {R.drawable.basic,R.drawable.basic2,R.drawable.basic3};
 
             for(int i=0; i<pArray.length(); i++)
             {
+                int rand = new Random().nextInt(images.length);
                 JSONObject pObject = pArray.getJSONObject(i);
-                UserInfo user = new UserInfo(pObject.getString("name"),pObject.getString("pn"), R.drawable.image1);
+                UserInfo user = new UserInfo(pObject.getString("name"),pObject.getString("pn"), pObject.getString("email"), images[rand]);
                 information.add(user);
             }
         }catch (JSONException e) {
@@ -100,18 +103,6 @@ public class Fragment1 extends Fragment {
         }
         return information;
     }
-
-
-
-    /*private void initData(){
-        information.clear();
-        //information: ArrayList<userinfo>
-
-        information.add(new UserInfo("이채영", "010-1111-1111", R.drawable.image1));
-        information.add(new UserInfo("정세진", "010-1111-1111", R.drawable.image2));
-        information.add(new UserInfo("정세진", "010-1111-1111", R.drawable.image3));
-    }
-    */
 
 
 

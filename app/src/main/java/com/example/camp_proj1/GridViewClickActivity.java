@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
 import android.widget.Adapter;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -19,10 +20,18 @@ public class GridViewClickActivity extends AppCompatActivity {
     private ViewPager mPager;
     ClickEventSliderAdapter adapter;
 
+import android.widget.GridLayout;
+import android.widget.ImageView;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager.widget.ViewPager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gridviewclickevent);
+
         //ImageView imageView = (ImageView)findViewById(R.id.imageView);
         mPager = (ViewPager) findViewById(R.id.pager);
         adapter = new ClickEventSliderAdapter(this);
@@ -30,6 +39,7 @@ public class GridViewClickActivity extends AppCompatActivity {
         int imageID = (Integer)receivedIntent.getExtras().get("image ID");
         mPager.setAdapter(adapter);
         mPager.setCurrentItem(2);
+
     }
 
     private void setImage(ImageView imageView) {
