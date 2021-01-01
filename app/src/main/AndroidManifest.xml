@@ -29,6 +29,13 @@
             >
 
         </activity>
+
+        <activity
+            android:name=".tab3Calender"
+            android:parentActivityName=".MainActivity"
+            >
+
+        </activity>
     </application>
 
 </manifest>
