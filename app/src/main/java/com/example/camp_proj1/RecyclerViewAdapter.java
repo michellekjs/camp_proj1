@@ -24,6 +24,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private LayoutInflater mInflate;
     private Context mContext;
 
+
     public RecyclerViewAdapter(Context context, ArrayList<UserInfo> persons) {
         this.mContext = context;
         this.mInflate = LayoutInflater.from(context);
@@ -59,6 +60,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapter.MyViewHolder holder, int position) {
+        DBHelper userDBhelper = new DBHelper(mContext, "user.db", null, 1);
+
         holder.name.setText(mPersons.get(position).name);
         //holder.number.setText(mPersons.get(position).phoneNumber);
         holder.imageView.setImageResource(mPersons.get(position).getPhoto());

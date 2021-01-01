@@ -1,6 +1,7 @@
 package com.example.camp_proj1;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Random;
 
 public class AddNewUserInfo extends AppCompatActivity {
     @Override
@@ -33,22 +36,19 @@ public class AddNewUserInfo extends AppCompatActivity {
                 String number = nameText.getText().toString();
                 EditText emailText = (EditText) findViewById(R.id.emailText);
                 String email = nameText.getText().toString();
-                UserInfo newUser = new UserInfo(name, number, email, 1);
-
+                DBHelper userDBhelper = new DBHelper(v.getContext(), "info.db", null, 1);
+                int[] images = {R.drawable.basic,R.drawable.basic2,R.drawable.basic3};
+                int rand = new Random().nextInt(images.length);
+                String sqlInsert = String.format("INSERT INTO USERDATA VALUES('%s', '%s', '%s', '%d');", name, number, email, images[rand]);
+                userDBhelper.getWritableDatabase().execSQL(sqlInsert);
                 finish();
             }
         });
-
         cancelbutton.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
-
-
     }
-
-
 }

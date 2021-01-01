@@ -3,6 +3,7 @@ package com.example.camp_proj1;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
@@ -21,13 +22,13 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<UserInfo> information = new ArrayList<>();
-    DBHelper userDBhelper;
+    DBHelper userDBhelper = new DBHelper(this, "info.db", null, 1);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        userDBhelper = new DBHelper(this, "user.db", null, 1);
         //add data (if first time)
+
         jsonParsing();
         //TabLayout
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
@@ -67,17 +68,19 @@ public class MainActivity extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject(json);
             JSONArray pArray = jsonObject.getJSONArray("info");
             int[] images = {R.drawable.basic,R.drawable.basic2,R.drawable.basic3};
+            String sql = "SELECT * FROM USERDATA";
+            Cursor cursor =  userDBhelper.getReadableDatabase().rawQuery(sql, null);
+            if(cursor.getCount()==0){
+                for(int i=0; i<pArray.length(); i++)
+                {
+                    int rand = new Random().nextInt(images.length);
+                    JSONObject pObject = pArray.getJSONObject(i);
+                    String sqlInsert = "INSERT INTO USERDATA"+ " (NAME, NUMBER, EMAIL, IMAGES) VALUES (\'" + pObject.getString("name") +"\', " + pObject.getString("pn") +", \'" + pObject.getString("email") +"\', " + images[rand] +")";
+                    userDBhelper.getWritableDatabase().execSQL(sqlInsert);
 
-            for(int i=0; i<pArray.length(); i++)
-            {
-                int rand = new Random().nextInt(images.length);
-                JSONObject pObject = pArray.getJSONObject(i);
-                String sqlInsert = "INSERT OR REPLACE INTO USERDATA"+ " (NAME, NUMBER, EMAIL, IMAGES) VALUES (\'" + pObject.getString("name") +"\', " + pObject.getString("pn") +", \'" + pObject.getString("email") +"\', " + images[rand] +")";
-
-                userDB.execSQL(sqlInsert);
-                UserInfo user = new UserInfo(pObject.getString("name"),pObject.getString("pn"), pObject.getString("email"), images[rand]);
-                information.add(user);
+                }
             }
+
         }catch (JSONException e) {
             e.printStackTrace();
         }
