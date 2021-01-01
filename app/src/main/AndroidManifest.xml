@@ -17,10 +17,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".RecyclerViewClickActivity">
+        <activity
+            android:name=".RecyclerViewClickActivity"
+            android:parentActivityName=".MainActivity"
+            >
             
         </activity>
-        <activity android:name=".GridViewClickActivity">
+        <activity
+            android:name=".GridViewClickActivity"
+            android:parentActivityName=".MainActivity"
+            >
 
         </activity>
     </application>
