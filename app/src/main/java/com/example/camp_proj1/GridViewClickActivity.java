@@ -38,7 +38,7 @@ public class GridViewClickActivity extends AppCompatActivity {
         Intent receivedIntent = getIntent();
         int imageID = (Integer)receivedIntent.getExtras().get("image ID");
         mPager.setAdapter(adapter);
-        mPager.setCurrentItem(2);
+        mPager.setCurrentItem(imageID);
 
     }
 

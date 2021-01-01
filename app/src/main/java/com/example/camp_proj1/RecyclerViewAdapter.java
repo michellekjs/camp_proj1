@@ -43,7 +43,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             name = (TextView) itemView.findViewById(R.id.user_name);
             //email = (TextView) itemView.findViewById(R.id.user_email);
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
-            number = (TextView) itemView.findViewById(R.id.user_number);
+            //number = (TextView) itemView.findViewById(R.id.user_number);
 
 
         }
@@ -60,7 +60,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapter.MyViewHolder holder, int position) {
         holder.name.setText(mPersons.get(position).name);
-        holder.number.setText(mPersons.get(position).phoneNumber);
+        //holder.number.setText(mPersons.get(position).phoneNumber);
         holder.imageView.setImageResource(mPersons.get(position).getPhoto());
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
