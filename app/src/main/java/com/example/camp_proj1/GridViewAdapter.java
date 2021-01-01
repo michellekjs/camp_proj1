@@ -42,12 +42,12 @@ public class GridViewAdapter extends BaseAdapter {
         }
         else{
             Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), imageIDs[position]);
-            bmp = Bitmap.createScaledBitmap(bmp, 320, 240, false);
+            //gridview 사진크기
+            bmp = Bitmap.createScaledBitmap(bmp, 450, 450, false);
 
             imageView = new ImageView(context);
             imageView.setImageBitmap(bmp);
-
-            ImageClickListener imageViewClickListener = new ImageClickListener(context, imageIDs[position], imageIDs);
+            ImageClickListener imageViewClickListener = new ImageClickListener(context, position, imageIDs);
 
             imageView.setOnClickListener(imageViewClickListener);
         }
