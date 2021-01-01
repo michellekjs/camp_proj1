@@ -1,6 +1,9 @@
 package com.example.camp_proj1;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.io.IOException;
@@ -22,6 +28,7 @@ import org.json.JSONObject;
 
 public class Fragment1 extends Fragment {
     public ArrayList<UserInfo> information = new ArrayList<>();
+    SQLiteDatabase userDB;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,12 +58,13 @@ public class Fragment1 extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_1, container, false);
-        information.clear();
-        jsonParsing();
+
 
         Context context = view.getContext();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(new fabClickListener());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -69,42 +77,22 @@ public class Fragment1 extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
-    public ArrayList<UserInfo> jsonParsing()
-    {
-        String json="";
-        try {
-            InputStream is = getActivity().getAssets().open("user.json");
-            int fileSize = is.available();
-
-            byte[] buffer = new byte[fileSize];
-            is.read(buffer);
-            is.close();
-
-            json = new String(buffer, "UTF-8");
-        }
-        catch (IOException ex)
-        {
-            ex.printStackTrace();
-        }
-        try{
-            JSONObject jsonObject = new JSONObject(json);
-            JSONArray pArray = jsonObject.getJSONArray("info");
-            int[] images = {R.drawable.basic,R.drawable.basic2,R.drawable.basic3};
-
-            for(int i=0; i<pArray.length(); i++)
-            {
-                int rand = new Random().nextInt(images.length);
-                JSONObject pObject = pArray.getJSONObject(i);
-                UserInfo user = new UserInfo(pObject.getString("name"),pObject.getString("pn"), pObject.getString("email"), images[rand]);
-                information.add(user);
-            }
-        }catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return information;
     }
 
+}
 
+class fabClickListener implements View.OnClickListener{
 
+    @Override
+    public void onClick(View v) {
+        Context context = v.getContext();
+        Intent intent = new Intent(context, AddNewUserInfo.class);
+        context.startActivity(intent);
+
+        //UserInfo addInformation = (UserInfo)intent.getExtras().get("added");
+    }
 }

@@ -1,5 +1,9 @@
 package com.example.camp_proj1;
 
+import android.app.Application;
+
+import java.util.ArrayList;
+
 public class UserInfo {
 
     String name;
@@ -25,3 +29,4 @@ public class UserInfo {
     public int getPhoto(){ return photo;}
 
 }
+
