@@ -31,7 +31,7 @@
         </activity>
 
         <activity
-            android:name=".tab3Calender"
+            android:name=".Calender"
             android:parentActivityName=".MainActivity"
             >
 

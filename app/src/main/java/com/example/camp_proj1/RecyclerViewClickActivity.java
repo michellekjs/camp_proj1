@@ -1,14 +1,14 @@
 package com.example.camp_proj1;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.TextView;
+        import android.app.Activity;
+        import android.content.Intent;
+        import android.graphics.BitmapFactory;
+        import android.os.Bundle;
+        import android.widget.ImageView;
+        import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+        import androidx.annotation.Nullable;
+        import androidx.appcompat.app.AppCompatActivity;
 
 public class RecyclerViewClickActivity extends AppCompatActivity {
     @Override
@@ -29,4 +29,3 @@ public class RecyclerViewClickActivity extends AppCompatActivity {
 
     }
 }
-

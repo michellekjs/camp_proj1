@@ -2,4 +2,8 @@
     <string name="app_name">Application</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fab_content_desc">+</string>
+    <string name="extended_fab_label"> Add Plans</string>
+    <string name="button_save"> Save </string>
+    <string name="texthint">TextHint</string>
 </resources>
