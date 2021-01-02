@@ -45,8 +45,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             //email = (TextView) itemView.findViewById(R.id.user_email);
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
             //number = (TextView) itemView.findViewById(R.id.user_number);
-
-
         }
     }
 
@@ -60,7 +58,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapter.MyViewHolder holder, int position) {
-        DBHelper userDBhelper = new DBHelper(mContext, "user.db", null, 1);
+
 
         holder.name.setText(mPersons.get(position).name);
         //holder.number.setText(mPersons.get(position).phoneNumber);
@@ -75,20 +73,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("name", mPersons.get(position).name);
                 intent.putExtra("number", mPersons.get(position).phoneNumber);
                 intent.putExtra("email", mPersons.get(position).email);
-
                 v.getContext().startActivity(intent);
             }
         });
 
     }
 
-
     @Override
     public int getItemCount() {
         return mPersons.size();
     }
 
-
-    //ViewHolder
 
 }

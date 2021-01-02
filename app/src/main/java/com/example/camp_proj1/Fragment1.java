@@ -30,7 +30,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Fragment1 extends Fragment {
-    public ArrayList<UserInfo> information = new ArrayList<>();
+    public ArrayList<UserInfo> information= new ArrayList<>();
+    private RecyclerViewAdapter adapter;
     DBHelper userDBhelper;
 
 
@@ -62,7 +63,7 @@ public class Fragment1 extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_1, container, false);
 
-        userDBhelper = new DBHelper(getContext(), "info.db", null, 1);
+
         Context context = view.getContext();
 
 
@@ -71,24 +72,50 @@ public class Fragment1 extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         FloatingActionButton fab = view.findViewById(R.id.fab);
-        fab.setOnClickListener(new fabClickListener());
+        fab.setOnClickListener(new FloatingActionButton.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, AddNewUserInfo.class);
+                context.startActivity(intent);
+            }
+        });
+
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(context, information);
+
+
+        adapter = new RecyclerViewAdapter(context, information);
         recyclerView.setAdapter(adapter);
-        // Inflate the layout for this fragment
+        if(datachecker.isChanged){
+            setViewWithDB();
+            datachecker.isChanged = false;
+        }
+        else{
+            information = datachecker.savedinfo;
+        }
 
         return view;
     }
 
     @Override
     public void onResume() {
+
         super.onResume();
+        setViewWithDB();
+        adapter.notifyDataSetChanged();
+
+    }
+
+    public void setViewWithDB(){
+        userDBhelper = new DBHelper(getContext(), "information.db", null, 1);
         information.clear();
         String sql = "SELECT * FROM USERDATA";
+
         Cursor cursor =  userDBhelper.getReadableDatabase().rawQuery(sql, null);
         try{
             if(cursor.getCount()>0){
@@ -98,25 +125,17 @@ public class Fragment1 extends Fragment {
                 }
             }
             else{}
-
         }
         finally {
             cursor.close();
         }
-
+        datachecker.savedinfo = information;
     }
 
 }
 
-class fabClickListener implements View.OnClickListener{
-
-    @Override
-    public void onClick(View v) {
-        Context context = v.getContext();
-        Intent intent = new Intent(context, AddNewUserInfo.class);
-        context.startActivity(intent);
-
-        //UserInfo addInformation = (UserInfo)intent.getExtras().get("added");
-    }
+class datachecker {
+    public static Boolean isChanged = true;
+    public static ArrayList<UserInfo> savedinfo = new ArrayList<>();
 }
 

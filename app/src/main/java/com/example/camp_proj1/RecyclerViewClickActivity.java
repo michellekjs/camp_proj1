@@ -25,26 +25,33 @@ public class RecyclerViewClickActivity extends AppCompatActivity {
         TextView textView2 = findViewById(R.id.number);
         TextView textView3 = findViewById(R.id.email);
         ImageView imageView = findViewById(R.id.image);
+
         Button callButton = findViewById(R.id.callbutton);
-        callButton.setOnClickListener(new cbClickListener());
+        callButton.setOnClickListener(new Button.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                DBHelper userDBhelper = new DBHelper(v.getContext(), "information.db", null, 1);
+                String sqlInsert = String.format("DELETE FROM USERDATA WHERE NAME = ('%s')",textView.getText());
+                userDBhelper.getWritableDatabase().execSQL(sqlInsert);
+                userDBhelper.close();
+                finish();
+
+
+                //String phonecall = "tel:01012344321";
+                //Context context = v.getContext();
+                //context.startActivity(new Intent("android.intent.action.CALL", Uri.parse(phonecall)));
+            }
+        });
 
         imageView.setImageResource(intent.getIntExtra("image",0));
         textView.setText(intent.getStringExtra("name"));
         textView2.setText(intent.getStringExtra("number"));
         textView3.setText(intent.getStringExtra("email"));
 
-
     }
 }
-class cbClickListener implements View.OnClickListener{
 
-    @Override
-    public void onClick(View v) {
 
-        String phonecall = "tel:01012344321";
-        Context context = v.getContext();
-        context.startActivity(new Intent("android.intent.action.CALL", Uri.parse(phonecall)));
 
-    }
-}
 

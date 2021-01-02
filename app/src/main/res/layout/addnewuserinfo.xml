@@ -100,7 +100,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:inputType="textEmailAddress"
-                android:hint="e-mail" />
+                android:hint="e-mail"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
+                />
 
         </LinearLayout>
         <LinearLayout
