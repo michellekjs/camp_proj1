@@ -3,6 +3,7 @@ package com.example.camp_proj1;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.DatePickerDialog;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
@@ -72,9 +73,9 @@ public class MainActivity extends AppCompatActivity {
             {
                 int rand = new Random().nextInt(images.length);
                 JSONObject pObject = pArray.getJSONObject(i);
-                String sqlInsert = "INSERT OR REPLACE INTO USERDATA"+ " (NAME, NUMBER, EMAIL, IMAGES) VALUES (\'" + pObject.getString("name") +"\', " + pObject.getString("pn") +", \'" + pObject.getString("email") +"\', " + images[rand] +")";
+                // sqlInsert = "INSERT OR REPLACE INTO USERDATA"+ " (NAME, NUMBER, EMAIL, IMAGES) VALUES (\'" + pObject.getString("name") +"\', " + pObject.getString("pn") +", \'" + pObject.getString("email") +"\', " + images[rand] +")";
 
-                userDB.execSQL(sqlInsert);
+                //userDB.execSQL(sqlInsert);
                 UserInfo user = new UserInfo(pObject.getString("name"),pObject.getString("pn"), pObject.getString("email"), images[rand]);
                 information.add(user);
             }

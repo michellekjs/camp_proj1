@@ -63,6 +63,7 @@ public class Fragment1 extends Fragment {
         Context context = view.getContext();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
+
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new fabClickListener());
 

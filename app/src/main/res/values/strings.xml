@@ -5,5 +5,7 @@
     <string name="fab_content_desc">+</string>
     <string name="extended_fab_label"> Add Plans</string>
     <string name="button_save"> Save </string>
-    <string name="texthint">TextHint</string>
+    <string name="texthint">Enter your schedule</string>
+    <string name="plan"> what is my plan</string>
+    <string name="home"> return </string>
 </resources>

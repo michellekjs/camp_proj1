@@ -44,12 +44,8 @@ public class Calender extends AppCompatActivity {
         String name="qwe";
        //final String userID=intent.getStringExtra("userID");
         textView3.setText("hi달력 일기장");
-        fab.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
 
-            }
-        });
+        //이거 일정 등록하는 창 띄우는 거
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -64,6 +60,8 @@ public class Calender extends AppCompatActivity {
                 checkDay(year,month,dayOfMonth);
             }
         });
+
+        //파일에 저장하는거
         save_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +77,8 @@ public class Calender extends AppCompatActivity {
             }
         });
     }
+
+
 
     public void  checkDay(int cYear,int cMonth,int cDay){
         fname=""+cYear+"-"+(cMonth+1)+""+"-"+cDay+".txt";//저장할 파일 이름설정
