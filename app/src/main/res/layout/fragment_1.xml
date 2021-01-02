@@ -16,8 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:src = "@drawable/basic"
+        android:src = "@drawable/plus"
         android:layout_margin="16dp"
         />
-
 </FrameLayout>

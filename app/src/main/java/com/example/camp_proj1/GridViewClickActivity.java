@@ -8,6 +8,7 @@ import android.view.View;
 
 import android.widget.Adapter;
 import android.widget.GridLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +23,9 @@ public class GridViewClickActivity extends AppCompatActivity {
 
     //private static int pagesNum = 3;
     private ViewPager mPager;
+    public ImageButton back_btn;
     ClickEventSliderAdapter adapter;
+
 
 
 
@@ -38,6 +41,15 @@ public class GridViewClickActivity extends AppCompatActivity {
         mPager.setAdapter(adapter);
         mPager.setCurrentItem(imageID);
         mPager.setPageTransformer(true, new ZoomOutPageSlide());
+
+        back_btn = findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                finish();
+            }
+
+        });
+
 
 
     }

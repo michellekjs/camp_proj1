@@ -26,6 +26,7 @@ public class RecyclerViewClickActivity extends AppCompatActivity {
         TextView textView3 = findViewById(R.id.email);
         ImageView imageView = findViewById(R.id.image);
 
+
         Button callButton = findViewById(R.id.callbutton);
         callButton.setOnClickListener(new Button.OnClickListener(){
 
@@ -43,6 +44,8 @@ public class RecyclerViewClickActivity extends AppCompatActivity {
                 //context.startActivity(new Intent("android.intent.action.CALL", Uri.parse(phonecall)));
             }
         });
+
+
 
         imageView.setImageResource(intent.getIntExtra("image",0));
         textView.setText(intent.getStringExtra("name"));

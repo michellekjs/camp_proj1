@@ -59,18 +59,18 @@ public class TextEditActivity extends  AppCompatActivity {
         Intent intent=new Intent(TextEditActivity.this,Fragment3.class);
 
         datePicker=(DatePicker)findViewById(R.id.dataPicker);
-        datePicker.init(2021, 1,1, new DatePicker.OnDateChangedListener(){
+        datePicker.init(2021, 12,1, new DatePicker.OnDateChangedListener(){
             @Override
             public void onDateChanged(DatePicker view, int year,int monthOfYear,int dayOfMonth){
                 String msg=String.format("%d,%d,%d", year , monthOfYear+1, dayOfMonth);
                 fname=msg;
-                Toast.makeText(TextEditActivity.this, msg, Toast.LENGTH_SHORT).show();
 
             }
         });
         save_Btn.setOnClickListener(new View.OnClickListener(){
         public void onClick(View view) {
             saveDiary(fname + ".txt");
+            finish();
             }
 
         });

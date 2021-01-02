@@ -52,4 +52,5 @@ public class ClickEventSliderAdapter extends PagerAdapter {
         container.invalidate();
     }
 
+
 }

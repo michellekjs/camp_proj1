@@ -25,6 +25,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
     private ArrayList<UserInfo> information = new ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
