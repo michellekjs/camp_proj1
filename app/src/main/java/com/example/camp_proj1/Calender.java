@@ -12,16 +12,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-public class tab3Calender extends AppCompatActivity {
+public class Calender extends AppCompatActivity {
 
     public String fname=null;
     public String str=null;
     public CalendarView calendarView;
     public Button cha_Btn,del_Btn,save_Btn;
-    public TextView diaryTextView,textView2,textView3;
+    public TextView diaryTextView,textView3;
     public EditText contextEditText;
 
     @Override
@@ -33,47 +35,53 @@ public class tab3Calender extends AppCompatActivity {
         save_Btn=findViewById(R.id.save_Btn);
         del_Btn=findViewById(R.id.del_Btn);
         cha_Btn=findViewById(R.id.cha_Btn);
-        textView2=findViewById(R.id.textView2);
+        //textView2=findViewById(R.id.textView2);
         textView3=findViewById(R.id.textView3);
         contextEditText=findViewById(R.id.contextEditText);
+        FloatingActionButton fab =findViewById(R.id.fab);
         //로그인 및 회원가입 엑티비티에서 이름을 받아옴
         Intent intent=getIntent();
         String name="qwe";
-        final String userID=intent.getStringExtra("userID");
-        textView3.setText(name+"님의 달력 일기장");
+       //final String userID=intent.getStringExtra("userID");
+        textView3.setText("hi달력 일기장");
 
+        //이거 일정 등록하는 창 띄우는 거
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 diaryTextView.setVisibility(View.VISIBLE);
                 save_Btn.setVisibility(View.VISIBLE);
                 contextEditText.setVisibility(View.VISIBLE);
-                textView2.setVisibility(View.INVISIBLE);
+                //textView2.setVisibility(View.INVISIBLE);
                 cha_Btn.setVisibility(View.INVISIBLE);
                 del_Btn.setVisibility(View.INVISIBLE);
                 diaryTextView.setText(String.format("%d / %d / %d",year,month+1,dayOfMonth));
                 contextEditText.setText("");
-                checkDay(year,month,dayOfMonth,userID);
+                checkDay(year,month,dayOfMonth);
             }
         });
+
+        //파일에 저장하는거
         save_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveDiary(fname);
                 str=contextEditText.getText().toString();
-                textView2.setText(str);
+                //textView2.setText(str);
                 save_Btn.setVisibility(View.INVISIBLE);
                 cha_Btn.setVisibility(View.VISIBLE);
                 del_Btn.setVisibility(View.VISIBLE);
                 contextEditText.setVisibility(View.INVISIBLE);
-                textView2.setVisibility(View.VISIBLE);
+                //textView2.setVisibility(View.VISIBLE);
 
             }
         });
     }
 
-    public void  checkDay(int cYear,int cMonth,int cDay,String userID){
-        fname=""+userID+cYear+"-"+(cMonth+1)+""+"-"+cDay+".txt";//저장할 파일 이름설정
+
+
+    public void  checkDay(int cYear,int cMonth,int cDay){
+        fname=""+cYear+"-"+(cMonth+1)+""+"-"+cDay+".txt";//저장할 파일 이름설정
         FileInputStream fis=null;//FileStream fis 변수
         try{
             fis=openFileInput(fname);
@@ -85,8 +93,8 @@ public class tab3Calender extends AppCompatActivity {
             str=new String(fileData);
 
             contextEditText.setVisibility(View.INVISIBLE);
-            textView2.setVisibility(View.VISIBLE);
-            textView2.setText(str);
+            //textView2.setVisibility(View.VISIBLE);
+            //textView2.setText(str);
 
             save_Btn.setVisibility(View.INVISIBLE);
             cha_Btn.setVisibility(View.VISIBLE);
@@ -96,20 +104,20 @@ public class tab3Calender extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     contextEditText.setVisibility(View.VISIBLE);
-                    textView2.setVisibility(View.INVISIBLE);
+                    //textView2.setVisibility(View.INVISIBLE);
                     contextEditText.setText(str);
 
                     save_Btn.setVisibility(View.VISIBLE);
                     cha_Btn.setVisibility(View.INVISIBLE);
                     del_Btn.setVisibility(View.INVISIBLE);
-                    textView2.setText(contextEditText.getText());
+                    //textView2.setText(contextEditText.getText());
                 }
 
             });
             del_Btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    textView2.setVisibility(View.INVISIBLE);
+                    //textView2.setVisibility(View.INVISIBLE);
                     contextEditText.setText("");
                     contextEditText.setVisibility(View.VISIBLE);
                     save_Btn.setVisibility(View.VISIBLE);
@@ -118,14 +126,14 @@ public class tab3Calender extends AppCompatActivity {
                     removeDiary(fname);
                 }
             });
-            if(textView2.getText()==null){
+           /* if(textView2.getText()==null){
                 textView2.setVisibility(View.INVISIBLE);
                 diaryTextView.setVisibility(View.VISIBLE);
                 save_Btn.setVisibility(View.VISIBLE);
                 cha_Btn.setVisibility(View.INVISIBLE);
                 del_Btn.setVisibility(View.INVISIBLE);
                 contextEditText.setVisibility(View.VISIBLE);
-            }
+            }*/
 
         }catch (Exception e){
             e.printStackTrace();
