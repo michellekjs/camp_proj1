@@ -89,17 +89,12 @@ public class Fragment3 extends Fragment {
                         filecontent.append(new String(buffer,0, n));
                     }
                     fis.close();
-
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 diaryTextView.setText(filecontent);
             }
-
-
         });
-
         return view;
     }
 
