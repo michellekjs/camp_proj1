@@ -14,8 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -33,16 +37,7 @@ public class Fragment1 extends Fragment {
     public ArrayList<UserInfo> information= new ArrayList<>();
     private RecyclerViewAdapter adapter;
     DBHelper userDBhelper;
-
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    MenuItem mSearch;
 
     public Fragment1() {
         // Required empty public constructor
@@ -52,8 +47,7 @@ public class Fragment1 extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -62,14 +56,14 @@ public class Fragment1 extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_1, container, false);
-
-
         Context context = view.getContext();
-
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(), 1));
         recyclerView.setHasFixedSize(true);
+
+        setHasOptionsMenu(true);
+
 
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new FloatingActionButton.OnClickListener(){
@@ -81,13 +75,9 @@ public class Fragment1 extends Fragment {
             }
         });
 
-
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-
-
 
         adapter = new RecyclerViewAdapter(context, information);
         recyclerView.setAdapter(adapter);
@@ -109,6 +99,13 @@ public class Fragment1 extends Fragment {
         setViewWithDB();
         adapter.notifyDataSetChanged();
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment1_menu, menu);
+        mSearch = menu.findItem(R.id.)
     }
 
     public void setViewWithDB(){
