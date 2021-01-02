@@ -3,7 +3,9 @@ package com.example.camp_proj1;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.app.DatePickerDialog;
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
@@ -22,14 +24,14 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<UserInfo> information = new ArrayList<>();
-    DBHelper userDBhelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        userDBhelper = new DBHelper(this, "user.db", null, 1);
         //add data (if first time)
-        jsonParsing();
+        if(CheckAppFirstExecute()) jsonParsing();
+
         //TabLayout
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText("Tab 1"));
@@ -47,9 +49,10 @@ public class MainActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
     }
 
-    public ArrayList<UserInfo> jsonParsing()
+    public void jsonParsing()
     {
         String json="";
+        DBHelper userDBhelper = new DBHelper(this, "information.db", null, 1);
         try {
             InputStream is = getAssets().open("user.json");
             int fileSize = is.available();
@@ -68,21 +71,33 @@ public class MainActivity extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject(json);
             JSONArray pArray = jsonObject.getJSONArray("info");
             int[] images = {R.drawable.basic,R.drawable.basic2,R.drawable.basic3};
-
-            for(int i=0; i<pArray.length(); i++)
-            {
-                int rand = new Random().nextInt(images.length);
-                JSONObject pObject = pArray.getJSONObject(i);
-                // sqlInsert = "INSERT OR REPLACE INTO USERDATA"+ " (NAME, NUMBER, EMAIL, IMAGES) VALUES (\'" + pObject.getString("name") +"\', " + pObject.getString("pn") +", \'" + pObject.getString("email") +"\', " + images[rand] +")";
-
-                //userDB.execSQL(sqlInsert);
-                UserInfo user = new UserInfo(pObject.getString("name"),pObject.getString("pn"), pObject.getString("email"), images[rand]);
-                information.add(user);
+            String sql = "SELECT * FROM USERDATA";
+            Cursor cursor =  userDBhelper.getReadableDatabase().rawQuery(sql, null);
+            if(cursor.getCount()==0){
+                for(int i=0; i<pArray.length(); i++)
+                {
+                    int rand = new Random().nextInt(images.length);
+                    JSONObject pObject = pArray.getJSONObject(i);
+                    String sqlInsert = "INSERT INTO USERDATA"+ " (NAME, NUMBER, EMAIL, IMAGES) VALUES (\'" + pObject.getString("name") +"\', " + pObject.getString("pn") +", \'" + pObject.getString("email") +"\', " + images[rand] +")";
+                    userDBhelper.getWritableDatabase().execSQL(sqlInsert);
+                    //userDBhelper.close();
+                }
             }
+
         }catch (JSONException e) {
             e.printStackTrace();
         }
-        return information;
+    }
+    public boolean CheckAppFirstExecute(){
+        SharedPreferences pref = getSharedPreferences("IsFirst" , Activity.MODE_PRIVATE);
+        boolean isFirst = pref.getBoolean("isFirst", false);
+        if(!isFirst){ //최초 실행시 true 저장
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean("isFirst", true);
+            editor.commit();
+        }
+
+        return !isFirst;
     }
 
 
