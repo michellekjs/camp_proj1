@@ -8,14 +8,21 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -28,21 +35,14 @@ import java.util.Random;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 public class Fragment1 extends Fragment {
-    public ArrayList<UserInfo> information= new ArrayList<>();
+    public ArrayList<UserInfo> information=  new ArrayList<>();
     private RecyclerViewAdapter adapter;
+    ArrayList<UserInfo> tmpdata = new ArrayList<>();
     DBHelper userDBhelper;
-
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    MenuItem mSearch;
 
     public Fragment1() {
         // Required empty public constructor
@@ -52,8 +52,7 @@ public class Fragment1 extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -62,14 +61,15 @@ public class Fragment1 extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_1, container, false);
-
-
         Context context = view.getContext();
-
+        
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(), 1));
         recyclerView.setHasFixedSize(true);
+
+        setHasOptionsMenu(true);
+
 
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new FloatingActionButton.OnClickListener(){
@@ -81,14 +81,13 @@ public class Fragment1 extends Fragment {
             }
         });
 
-
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
 
 
+        
         adapter = new RecyclerViewAdapter(context, information);
         recyclerView.setAdapter(adapter);
         if(datachecker.isChanged){
@@ -99,17 +98,53 @@ public class Fragment1 extends Fragment {
             information = datachecker.savedinfo;
         }
 
+        tmpdata.addAll(information);
         return view;
     }
 
     @Override
     public void onResume() {
-
         super.onResume();
+
         setViewWithDB();
+        datachecker.savedinfo = information;
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment1_menu, menu);
+        androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                information.clear();
+
+               for (int i = 0; i<tmpdata.size();i++){
+                   if(tmpdata.get(i).getName().toLowerCase().contains(newText)){
+                        information.add(tmpdata.get(i));
+                   }
+
+               }
+                adapter.notifyDataSetChanged();
+                return false;
+            }
+
+
+        });
+
 
     }
+
 
     public void setViewWithDB(){
         userDBhelper = new DBHelper(getContext(), "information.db", null, 1);
@@ -124,12 +159,16 @@ public class Fragment1 extends Fragment {
                     information.add(infoColum);
                 }
             }
-            else{}
+            else{
+
+            }
         }
         finally {
             cursor.close();
         }
         datachecker.savedinfo = information;
+        tmpdata.clear();
+        tmpdata.addAll(information);
     }
 
 }

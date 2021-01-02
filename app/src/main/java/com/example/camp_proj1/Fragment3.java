@@ -98,8 +98,6 @@ public class Fragment3 extends Fragment {
                         filecontent.append(new String(buffer, 0, n));
                     }
                     fis.close();
-
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -108,8 +106,8 @@ public class Fragment3 extends Fragment {
 
             }
 
-        });
 
+        });
         return view;
     }
 
