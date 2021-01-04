@@ -48,7 +48,7 @@ public class GridViewAdapter extends BaseAdapter {
         else{
             Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), imageIDs.get(position));
             //gridview 사진크기
-            bmp = Bitmap.createScaledBitmap(bmp, 450, 450, false);
+            bmp = Bitmap.createScaledBitmap(bmp, 500, 500, false);
 
             imageView = new ImageView(context);
             imageView.setImageBitmap(bmp);

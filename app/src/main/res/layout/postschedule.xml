@@ -15,16 +15,35 @@
             android:layout_height="wrap_content"
             android:background="@drawable/back"
             android:layout_gravity="top"
-            android:layout_margin="20dp"/>
+           />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="left|center_vertical"
+        android:text="New Schedule"
+        android:textColor="#979797"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 
         <DatePicker
             android:id="@+id/dataPicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:calendarViewShown="false"
             android:datePickerMode="spinner"
             android:layout_gravity="center"
+            android:layout_marginTop="30dp"
             />
 
     <EditText
@@ -39,6 +58,8 @@
         android:imeOptions="actionDone"
         />
 
+    </LinearLayout>
+
     <Button
             android:id="@+id/save_Btn"
             android:layout_width="wrap_content"
@@ -46,6 +67,7 @@
             android:layout_gravity="end"
             android:text="@string/button_save"
             android:layout_marginTop="30dp"
+            android:backgroundTint="#F6A08E"
             />
 
 
