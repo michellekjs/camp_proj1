@@ -19,20 +19,19 @@ public class ClickEventSliderAdapter extends PagerAdapter {
 
     private LayoutInflater inflater;
     private Context context;
-    ArrayList<Integer> imageIDs = new ArrayList<Integer>();
+    private ArrayList<Integer> images = new ArrayList<Integer>();
 
-    public ClickEventSliderAdapter(Context context, ArrayList<Integer> imageIDs){
-        this.imageIDs.clear();
+    public ClickEventSliderAdapter(Context context, ArrayList<Integer> list){
         this.context = context;
-        this.imageIDs.addAll(imageIDs);
+        this.images.clear();
+        this.images.addAll(list);
 
     }
 
     @Override
     public int getCount() {
-        return imageIDs.size();
+        return images.size();
     }
-
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
@@ -45,7 +44,7 @@ public class ClickEventSliderAdapter extends PagerAdapter {
                 (Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.clickeventslider, container, false);
         ImageView imageView = (ImageView)v.findViewById(R.id.imageView);
-        imageView.setImageResource(imageIDs.get(position));
+        imageView.setImageResource(images.get(position));
         container.addView(v);
         return v;
     }

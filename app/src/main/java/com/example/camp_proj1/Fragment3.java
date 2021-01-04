@@ -46,10 +46,6 @@ public class Fragment3 extends Fragment {
     public TextView diaryTextView, textView3;
     public EditText contextEditText;
     public String filename = null;
-    public StringBuffer filecontent= null;
-    public String text=null;
-    //public StringBuffer filecontent;
-
     public Integer n;
 
 
@@ -85,8 +81,6 @@ public class Fragment3 extends Fragment {
         cha_Btn.setOnClickListener(new editClickListener());
 
 
-
-
         cal = (CalendarView) view.findViewById(R.id.calendarView);
         diaryTextView = view.findViewById(R.id.diaryTextView);
 
@@ -94,37 +88,29 @@ public class Fragment3 extends Fragment {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 filename = String.format("%d,%d,%d", year, month + 1, dayOfMonth); //파일이름 비교대상
-                File file = new File("/data/data/com.example.camp_proj1/files/" + filename + ".txt");
-                filecontent = new StringBuffer("");
                 FileInputStream fis = null;
+                StringBuffer filecontent = new StringBuffer("");
 
-                if (file.exists()) {
-
-                    try {
-                        fis = getActivity().openFileInput(filename + ".txt");
-                        byte[] buffer = new byte[1024];
-                        while ((n = fis.read(buffer)) != -1) {
-                            filecontent.append(new String(buffer, 0, n));
-                        }
-                        fis.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    fis = getActivity().openFileInput(filename + ".txt");
+                    byte[] buffer = new byte[1024];
+                    while ((n = fis.read(buffer)) != -1) {
+                        filecontent.append(new String(buffer, 0, n));
                     }
-
-                    diaryTextView.setText(filecontent);
-                    text=filecontent.toString();
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
-                else {
-                    diaryTextView.setText("");
-                }
+                diaryTextView.setText(filecontent);
 
             }
+
+
         });
         return view;
     }
 
-    //delete 하는 함수
     @SuppressLint("WrongConstant")
     public void removeDiary() {
         FileOutputStream fos = null;
@@ -140,14 +126,15 @@ public class Fragment3 extends Fragment {
         }
     }
 
-
-
-    //delete/change/adding schedule clicklistener
-
     class delClickListener implements View.OnClickListener {
         @Override
+
         public void onClick(View v) {
+
             removeDiary();
+
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.detach(Fragment3.this).attach(Fragment3.this).commit();
 
             Context context = v.getContext();
             CharSequence text = "Schedule Deleted!";
@@ -155,9 +142,6 @@ public class Fragment3 extends Fragment {
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
-
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.detach(Fragment3.this).attach(Fragment3.this).commit();
 
         }
 
@@ -169,23 +153,22 @@ public class Fragment3 extends Fragment {
         public void onClick(View v) {
             Context context = v.getContext();
             Intent intent = new Intent(context, TextEditActivity.class);
-            intent.putExtra("date", filename);
-            intent.putExtra("content", text);
             context.startActivity(intent);
 
         }
     }
+
 
     class editClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             removeDiary();
             Context context = v.getContext();
-            Intent intent = new Intent(context, TextReviseActivity.class);
-            intent.putExtra("date", filename);
-            intent.putExtra("content", text);
+            Intent intent = new Intent(context, TextEditActivity.class);
             context.startActivity(intent);
         }
+
+
     }
 }
 

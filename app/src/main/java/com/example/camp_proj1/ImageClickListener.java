@@ -14,13 +14,15 @@ public class ImageClickListener implements View.OnClickListener{
     public ImageClickListener(Context context, int ImageID, ArrayList<Integer> list){
         this.context = context;
         this.imageID = ImageID;
-        imageIDs.addAll(list);
+        this.imageIDs.clear();
+        this.imageIDs.addAll(list);
+
     }
 
     public void onClick(View v){
         Intent intent = new Intent(context, GridViewClickActivity.class);
         intent.putExtra("image ID",imageID);
-        intent.putIntegerArrayListExtra("ImageList",imageIDs);
+        intent.putIntegerArrayListExtra("ImageList", imageIDs);
         context.startActivity(intent);
     }
 }

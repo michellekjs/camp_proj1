@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
 
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <ImageView
+            android:id = "@+id/sampleimage"
             android:layout_margin="100px"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             android:layout_gravity="center"
             android:src = "@drawable/basic"/>
         <LinearLayout
@@ -34,7 +34,7 @@
                 android:maxWidth="25dp"
                 android:maxHeight="25dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/basic"
+                android:src="@drawable/phonenumber"
                 tools:ignore="Suspicious0dp" />
 
             <EditText
@@ -46,6 +46,7 @@
                 android:hint="이름"
                 tools:ignore="Suspicious0dp"
                 />
+
 
         </LinearLayout>
         <LinearLayout
@@ -64,7 +65,7 @@
                 android:maxWidth="25dp"
                 android:maxHeight="25dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/basic" />
+                android:src="@drawable/call" />
 
             <EditText
                 android:id = "@+id/numberText"
@@ -92,7 +93,7 @@
                 android:maxHeight="25dp"
                 android:maxWidth="25dp"
                 android:adjustViewBounds="true"
-                android:src = "@drawable/basic" />
+                android:src = "@drawable/email" />
 
             <EditText
                 android:id = "@+id/emailText"
@@ -132,4 +133,7 @@
 
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+
+
+</ScrollView>

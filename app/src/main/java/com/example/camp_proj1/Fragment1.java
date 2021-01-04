@@ -65,11 +65,10 @@ public class Fragment1 extends Fragment {
         
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        recyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(), 0));
+        recyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(), 1));
         recyclerView.setHasFixedSize(true);
 
         setHasOptionsMenu(true);
-
 
 
         FloatingActionButton fab = view.findViewById(R.id.fab);
@@ -87,6 +86,8 @@ public class Fragment1 extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
 
+
+        
         adapter = new RecyclerViewAdapter(context, information);
         recyclerView.setAdapter(adapter);
         if(datachecker.isChanged){

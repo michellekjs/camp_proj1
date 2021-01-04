@@ -30,16 +30,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Image.setData();
         //add data (if first time)
         if(CheckAppFirstExecute()) jsonParsing();
 
         //TabLayout
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("Contacts"));
-        tabs.addTab(tabs.newTab().setText("Gallery"));
-        tabs.addTab(tabs.newTab().setText("Scheduler"));
+        tabs.addTab(tabs.newTab().setText("Tab 1"));
+        tabs.addTab(tabs.newTab().setText("Tab 2"));
+        tabs.addTab(tabs.newTab().setText("Tab 3"));
         tabs.setTabGravity(tabs.GRAVITY_FILL);
+        Image.setData();
 
         //어답터설정
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);

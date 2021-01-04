@@ -3,23 +3,26 @@ package com.example.camp_proj1;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Random;
 
 public class AddNewUserInfo extends AppCompatActivity {
     int[] images = {R.drawable.basic,R.drawable.basic2,R.drawable.basic3};
-
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,9 @@ public class AddNewUserInfo extends AppCompatActivity {
         EditText nameText = (EditText) findViewById(R.id.nameText);
         EditText numberText = (EditText) findViewById(R.id.numberText);
         EditText emailText = (EditText) findViewById(R.id.emailText);
+        ImageView imageView = (ImageView) findViewById(R.id.sampleimage);
+        imageView.setBackground(new ShapeDrawable(new OvalShape()));
+        imageView.setClipToOutline(true);
 
         savebutton.setOnClickListener(new Button.OnClickListener(){
             @Override
