@@ -71,6 +71,7 @@ public class Fragment1 extends Fragment {
         setHasOptionsMenu(true);
 
 
+
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new FloatingActionButton.OnClickListener(){
             @Override

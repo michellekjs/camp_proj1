@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
         //TabLayout
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("Tab 1"));
-        tabs.addTab(tabs.newTab().setText("Tab 2"));
-        tabs.addTab(tabs.newTab().setText("Tab 3"));
+        tabs.addTab(tabs.newTab().setText("Contacts"));
+        tabs.addTab(tabs.newTab().setText("Gallery"));
+        tabs.addTab(tabs.newTab().setText("Scheduler"));
         tabs.setTabGravity(tabs.GRAVITY_FILL);
 
         //어답터설정
