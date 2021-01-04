@@ -12,24 +12,27 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.PagerAdapter;
 
+import java.util.ArrayList;
+
 public class ClickEventSliderAdapter extends PagerAdapter {
 
 
     private LayoutInflater inflater;
     private Context context;
-    private int[] images;
+    ArrayList<Integer> imageIDs = new ArrayList<Integer>();
 
-    public ClickEventSliderAdapter(Context context){
+    public ClickEventSliderAdapter(Context context, ArrayList<Integer> imageIDs){
+        this.imageIDs.clear();
         this.context = context;
-        Fragment2 fragment2 = new Fragment2();
-        images = fragment2.imageIDs;
+        this.imageIDs.addAll(imageIDs);
 
     }
 
     @Override
     public int getCount() {
-        return images.length;
+        return imageIDs.size();
     }
+
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
@@ -42,7 +45,7 @@ public class ClickEventSliderAdapter extends PagerAdapter {
                 (Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.clickeventslider, container, false);
         ImageView imageView = (ImageView)v.findViewById(R.id.imageView);
-        imageView.setImageResource(images[position]);
+        imageView.setImageResource(imageIDs.get(position));
         container.addView(v);
         return v;
     }
