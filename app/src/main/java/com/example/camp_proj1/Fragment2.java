@@ -3,9 +3,12 @@ package com.example.camp_proj1;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
@@ -22,7 +25,6 @@ public class Fragment2 extends Fragment {
         imageIDs.clear();
         imageIDs.addAll(Image.imageIDS);
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
