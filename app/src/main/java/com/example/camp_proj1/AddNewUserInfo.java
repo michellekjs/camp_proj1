@@ -8,6 +8,7 @@ import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import java.util.Random;
 
 public class AddNewUserInfo extends AppCompatActivity {
     int[] images = {R.drawable.basic,R.drawable.basic2,R.drawable.basic3};
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

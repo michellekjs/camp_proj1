@@ -10,28 +10,33 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
+import static androidx.viewpager.widget.PagerAdapter.POSITION_NONE;
+
 public class GridViewAdapter extends BaseAdapter {
     Context context = null;
-    int[] imageIDs = null;
+    ArrayList<Integer> imageIDs = new ArrayList<Integer>();
 
-    public GridViewAdapter(Context context, int[] imageIDs){
+    public GridViewAdapter(Context context, ArrayList<Integer> imageIDs){
         this.context = context;
-        this.imageIDs = imageIDs;
+        this.imageIDs.addAll(imageIDs);
     }
     @Override
     public int getCount() {
-        return (null!=imageIDs)? imageIDs.length : 0;
+        return (null!=imageIDs)? imageIDs.size() : 0;
     }
 
     @Override
     public Object getItem(int position) {
-        return (null!=imageIDs)? imageIDs[position] : 0;
+        return (null!=imageIDs)? imageIDs.get(position) : 0;
     }
 
     @Override
     public long getItemId(int position) {
         return position;
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -41,7 +46,7 @@ public class GridViewAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
         else{
-            Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), imageIDs[position]);
+            Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), imageIDs.get(position));
             //gridview 사진크기
             bmp = Bitmap.createScaledBitmap(bmp, 450, 450, false);
 
@@ -54,5 +59,10 @@ public class GridViewAdapter extends BaseAdapter {
         return imageView;
     }
 
+    public void refresh(ArrayList<Integer> imageIDs){
+        this.imageIDs.clear();
+        this.imageIDs.addAll(imageIDs);
+        notifyDataSetChanged();
+    }
 
 }

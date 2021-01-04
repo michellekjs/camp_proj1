@@ -86,8 +86,6 @@ public class Fragment1 extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
 
-
-        
         adapter = new RecyclerViewAdapter(context, information);
         recyclerView.setAdapter(adapter);
         if(datachecker.isChanged){

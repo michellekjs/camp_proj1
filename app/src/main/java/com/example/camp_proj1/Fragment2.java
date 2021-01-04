@@ -10,34 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
+import java.util.ArrayList;
+
 
 public class Fragment2 extends Fragment {
 
-
-    public int[] imageIDs = new int[]{
-            R.drawable.image1,
-            R.drawable.image2,
-            R.drawable.image3,
-            R.drawable.basic,
-            R.drawable.basic2,
-            R.drawable.basic3,
-            R.drawable.image4,
-            R.drawable.image5,
-            R.drawable.image6,
-            R.drawable.image7,
-            R.drawable.image8,
-            R.drawable.image9,
-            R.drawable.image10,
-            R.drawable.image4,
-            R.drawable.image4,
-            R.drawable.image4,
-            R.drawable.image4,
-
-    };
-
+    public ArrayList<Integer> imageIDs = new ArrayList<Integer>();
+    private GridViewAdapter adapter;
 
     public Fragment2() {
-        // Required empty public constructor
+        imageIDs.clear();
+        imageIDs.addAll(Image.imageIDS);
     }
 
 
@@ -53,8 +36,50 @@ public class Fragment2 extends Fragment {
         View view = inflater.inflate(R.layout.fragment_2, container, false);
         Context context = view.getContext();
         GridView gridViewImages = (GridView) view.findViewById(R.id.gridViewImages);
-        GridViewAdapter gridViewAdapter = new GridViewAdapter(context,imageIDs);
-        gridViewImages.setAdapter(gridViewAdapter);
+        adapter = new GridViewAdapter(context,imageIDs);
+        gridViewImages.setAdapter(adapter);
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        imageIDs.clear();
+        imageIDs.addAll(Image.imageIDS);
+        adapter.refresh(imageIDs);
+        GridView gridViewImages = (GridView) getView().findViewById(R.id.gridViewImages);
+        adapter = new GridViewAdapter(getContext(),imageIDs);
+        gridViewImages.setAdapter(adapter);
+        //adapter.notifyDataSetChanged();
+
+    }
+
+}
+
+class Image {
+    public  static ArrayList<Integer> imageIDS = new ArrayList<Integer>();
+
+   public static void setData(){
+        imageIDS.clear();
+        imageIDS.add(R.drawable.image1);
+        imageIDS.add(R.drawable.image2);
+        imageIDS.add(R.drawable.image3);
+        imageIDS.add(R.drawable.image4);
+        imageIDS.add(R.drawable.image5);
+        imageIDS.add(R.drawable.image6);
+        imageIDS.add(R.drawable.image7);
+        imageIDS.add(R.drawable.image8);
+        imageIDS.add(R.drawable.image9);
+        imageIDS.add(R.drawable.image10);
+        imageIDS.add(R.drawable.basic);
+        imageIDS.add(R.drawable.basic2);
+        imageIDS.add(R.drawable.basic3);
+    }
+    public static void deleteImage(int position){
+       for(int i = position; i<imageIDS.size()-1; i++){
+           imageIDS.set(i, imageIDS.get(i + 1));
+       }
+    }
+
+
 }

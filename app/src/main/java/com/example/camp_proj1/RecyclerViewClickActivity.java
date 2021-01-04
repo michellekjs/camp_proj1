@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class RecyclerViewClickActivity extends AppCompatActivity {
+    public ImageButton back_btn;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +28,13 @@ public class RecyclerViewClickActivity extends AppCompatActivity {
         TextView textView2 = findViewById(R.id.number);
         TextView textView3 = findViewById(R.id.email);
         ImageView imageView = findViewById(R.id.image);
+
+        back_btn = findViewById(R.id.goback_Btn);
+        back_btn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
         Button callButton = findViewById(R.id.callbutton);
