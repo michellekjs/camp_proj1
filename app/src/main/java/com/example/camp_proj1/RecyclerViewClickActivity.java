@@ -64,7 +64,8 @@ public class RecyclerViewClickActivity extends AppCompatActivity {
 
 
 
-        imageView.setImageResource(intent.getIntExtra("image",0));
+        //imageView.setImageResource(intent.getIntExtra("image",0));
+        imageView.setImageResource(R.drawable.basic);
         textView.setText(intent.getStringExtra("name"));
         textView2.setText(intent.getStringExtra("number"));
         textView3.setText(intent.getStringExtra("email"));

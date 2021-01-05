@@ -43,6 +43,7 @@ public class Fragment1 extends Fragment {
     ArrayList<UserInfo> tmpdata = new ArrayList<>();
     DBHelper userDBhelper;
     MenuItem mSearch;
+    RecyclerView recyclerView;
 
     public Fragment1() {
         // Required empty public constructor
@@ -64,8 +65,7 @@ public class Fragment1 extends Fragment {
         Context context = view.getContext();
         
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        recyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(), 1));
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
 
         setHasOptionsMenu(true);
@@ -85,11 +85,6 @@ public class Fragment1 extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-
-
-        
-        adapter = new RecyclerViewAdapter(context, information);
-        recyclerView.setAdapter(adapter);
         if(datachecker.isChanged){
             setViewWithDB();
             datachecker.isChanged = false;
@@ -97,6 +92,9 @@ public class Fragment1 extends Fragment {
         else{
             information = datachecker.savedinfo;
         }
+        adapter = new RecyclerViewAdapter(context, information);
+        recyclerView.setAdapter(adapter);
+
 
         tmpdata.addAll(information);
         return view;
@@ -109,6 +107,7 @@ public class Fragment1 extends Fragment {
         setViewWithDB();
         datachecker.savedinfo = information;
         adapter.notifyDataSetChanged();
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
