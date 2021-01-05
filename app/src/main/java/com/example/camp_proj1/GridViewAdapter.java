@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
 public class GridViewAdapter extends BaseAdapter {
@@ -39,21 +41,20 @@ public class GridViewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView = null;
 
+        RecyclerView.ViewHolder viewHolder = null;
         if(null != convertView){
             imageView = (ImageView) convertView;
         }
         else{
-            Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), imageIDs.get(position));
-
-            //gridview 사진크기
-            bmp = Bitmap.createScaledBitmap(bmp, 450, 450, false);
-
             imageView = new ImageView(context);
-            imageView.setImageBitmap(bmp);
-            ImageClickListener imageViewClickListener = new ImageClickListener(context, position, imageIDs);
-
-            imageView.setOnClickListener(imageViewClickListener);
         }
+
+        Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), imageIDs.get(position));
+        //gridview 사진크기
+        bmp = Bitmap.createScaledBitmap(bmp, 450, 450, false);
+        imageView.setImageBitmap(bmp);
+        ImageClickListener imageViewClickListener = new ImageClickListener(context, position, imageIDs);
+        imageView.setOnClickListener(imageViewClickListener);
         return imageView;
     }
 

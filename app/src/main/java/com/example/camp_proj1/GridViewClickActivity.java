@@ -1,49 +1,33 @@
 package com.example.camp_proj1;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.MenuItem;
 import android.view.View;
-
-import android.widget.Adapter;
-import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager.widget.ViewPager;import android.widget.GridLayout;
-import android.widget.ImageView;
-import android.widget.Toast;
-
-import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.kakao.kakaolink.v2.KakaoLinkResponse;
 import com.kakao.kakaolink.v2.KakaoLinkService;
 import com.kakao.message.template.ButtonObject;
 import com.kakao.message.template.ContentObject;
 import com.kakao.message.template.FeedTemplate;
 import com.kakao.message.template.LinkObject;
-import com.kakao.message.template.SocialObject;
 import com.kakao.network.ErrorResult;
 import com.kakao.network.callback.ResponseCallback;
-import com.kakao.util.KakaoParameterException;
 import com.kakao.util.helper.log.Logger;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GridViewClickActivity extends AppCompatActivity {
 
@@ -51,6 +35,7 @@ public class GridViewClickActivity extends AppCompatActivity {
     private ViewPager mPager;
     public ImageButton back_btn;
     ArrayList<Integer> imageIDs = new ArrayList<Integer>();
+    ArrayList<String> imageURLs = new ArrayList<>();
     ClickEventSliderAdapter adapter;
 
 
@@ -95,6 +80,8 @@ public class GridViewClickActivity extends AppCompatActivity {
 
 
         imageIDs = (ArrayList<Integer>) receivedIntent.getIntegerArrayListExtra("ImageList");
+        imageURLs.clear();
+        imageURLs.addAll(Image.imageURLs);
         adapter = new ClickEventSliderAdapter(this, imageIDs);
         mPager.setAdapter(adapter);
         mPager.setCurrentItem(imageID);
@@ -107,6 +94,7 @@ public class GridViewClickActivity extends AppCompatActivity {
             }
 
         });
+
         buttomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -118,14 +106,16 @@ public class GridViewClickActivity extends AppCompatActivity {
                         sharingIntent.setType("image/png");
                         sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
                         startActivity(Intent.createChooser(sharingIntent, "Share image using"));*/
-                        kakaolink();
+                        Intent intent = new Intent(getApplicationContext(), sharingphoto.class);
+                        intent.putExtra("showImage", imageID);
+
+                        kakaolink(imageURLs.get(imageID));
                         return true;
-
-
                     }
                     case R.id.delteItem : {
 
                         Image.imageIDs.remove(imageID);
+                        Image.imageURLs.remove(imageID);
                         finish();
                         return true;
                     }
@@ -137,20 +127,37 @@ public class GridViewClickActivity extends AppCompatActivity {
 
     }
 
-    public void kakaolink() {
+    public void kakaolink(String url) {
+
         FeedTemplate params = FeedTemplate
-                .newBuilder(ContentObject.newBuilder("몰입캠프",
-                        "https://scontent.ficn2-1.fna.fbcdn.net/v/t1.0-1/72228258_102011874554306_4931420924588064768_n.jpg?_nc_cat=106&ccb=2&_nc_sid=dbb9e7&_nc_ohc=aRk5UwUgcTwAX8XuG8U&_nc_ht=scontent.ficn2-1.fna&oh=266841b5a0354bf254e4f40114d2a7b4&oe=601AA8C6",
-                        LinkObject.newBuilder().setWebUrl("https://developers.kakao.com")
+                .newBuilder(ContentObject.newBuilder("몰입캠프", url,
+                        LinkObject.newBuilder().setWebUrl(url)
                                 .setMobileWebUrl("https://developers.kakao.com").build())
                         .setDescrption("사진공유해요~")
                         .build())
+                .addButton( new ButtonObject("웹에서 보기", LinkObject.newBuilder()
+                        .setWebUrl(url)
+                        .setMobileWebUrl(url)
+                        .build())
+                )
                 .addButton(new ButtonObject("앱에서 보기", LinkObject.newBuilder()
-                        .setWebUrl("'https://developers.kakao.com")
+                        .setWebUrl(url)
+                        .setMobileWebUrl(url)
                         .setAndroidExecutionParams("key1=value1")
                         .setIosExecutionParams("key1=value1")
                         .build()))
                 .build();
+
+        File file = new File("/data/data/com.example.camp_proj1/files/image.txt");
+        StringBuffer filecontent = new StringBuffer("");
+
+
+        if (file.exists()) {
+
+        } else {
+            saveDiary( "image.txt", url);
+            finish();
+        }
 
         Map<String, String> serverCallbackArgs = new HashMap<String, String>();
         serverCallbackArgs.put("user_id", "${current_user_id}");
@@ -174,6 +181,16 @@ public class GridViewClickActivity extends AppCompatActivity {
         Intent receivedIntent = getIntent();
         int imageID = (Integer)receivedIntent.getExtras().get("image ID");
         imageView.setImageResource(imageID);
+    }
+
+    public void saveDiary(String readText, String url) {
+        try {
+            FileOutputStream fos = openFileOutput(readText, MODE_PRIVATE);
+            fos.write((url).getBytes());
+            fos.close(); //파일에 컨텐츠를 넣고 닫음
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

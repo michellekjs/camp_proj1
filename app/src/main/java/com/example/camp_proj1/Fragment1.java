@@ -66,7 +66,9 @@ public class Fragment1 extends Fragment {
         
 
 
+
          recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+
         recyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(), 0));
 
         recyclerView.setHasFixedSize(true);
@@ -109,6 +111,7 @@ public class Fragment1 extends Fragment {
 
         setViewWithDB();
         datachecker.savedinfo = information;
+       // adapter = new RecyclerViewAdapter(getContext(), information);
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
     }
