@@ -41,7 +41,7 @@ public class RecyclerViewClickActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                String phonecall = "tel:01012344321";
+                String phonecall = "tel:0"+intent.getStringExtra("number");
                 Context context = v.getContext();
                 context.startActivity(new Intent("android.intent.action.CALL", Uri.parse(phonecall)));
 
