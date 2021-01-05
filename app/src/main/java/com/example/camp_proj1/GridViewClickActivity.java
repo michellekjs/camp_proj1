@@ -113,15 +113,11 @@ public class GridViewClickActivity extends AppCompatActivity {
     public void kakaolink() {
         FeedTemplate params = FeedTemplate
                 .newBuilder(ContentObject.newBuilder("몰입캠프",
-                        "http://mud-kage.kakao.co.kr/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg",
+                        "https://scontent.ficn2-1.fna.fbcdn.net/v/t1.0-1/72228258_102011874554306_4931420924588064768_n.jpg?_nc_cat=106&ccb=2&_nc_sid=dbb9e7&_nc_ohc=aRk5UwUgcTwAX8XuG8U&_nc_ht=scontent.ficn2-1.fna&oh=266841b5a0354bf254e4f40114d2a7b4&oe=601AA8C6",
                         LinkObject.newBuilder().setWebUrl("https://developers.kakao.com")
                                 .setMobileWebUrl("https://developers.kakao.com").build())
                         .setDescrption("사진공유해요~")
                         .build())
-                .addButton(new ButtonObject("웹에서 보기", LinkObject.newBuilder()
-                        .setWebUrl("'https://developers.kakao.com")
-                        .setMobileWebUrl("'https://developers.kakao.com")
-                        .build()))
                 .addButton(new ButtonObject("앱에서 보기", LinkObject.newBuilder()
                         .setWebUrl("'https://developers.kakao.com")
                         .setAndroidExecutionParams("key1=value1")
