@@ -1,14 +1,22 @@
 package com.example.camp_proj1;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -25,12 +33,69 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
     private ArrayList<UserInfo> information = new ArrayList<>();
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_theme, menu);
+        menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.palette));
+        return true;
+    }
+
+    public String theme;
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        Intent intent = new Intent(getApplicationContext(),TextReviseActivity.class);
+
+        if (id == R.id.theme_1) {
+            Toast.makeText(this, "mint", Toast.LENGTH_SHORT).show();
+            Utils.changeToTheme(this,Utils.THEME_DEFAULT);
+            intent.putExtra("theme","theme_1");
+            TextSetting.theme = 1;
+            return true;
+        }
+        if (id ==R.id.theme_2) {
+            Toast.makeText(this, "orange", Toast.LENGTH_SHORT).show();
+            Utils.changeToTheme(this,Utils.THEME_ORANGE);
+            intent.putExtra("theme","theme_2");
+            TextSetting.theme = 2;
+            return true;
+        }
+        if (id == R.id.theme_3) {
+            Toast.makeText(this, "pink", Toast.LENGTH_SHORT).show();
+            Utils.changeToTheme(this,Utils.THEME_PINK);
+            intent.putExtra("theme","theme_3");
+            TextSetting.theme = 3;
+            return true;
+        }
+        if (id == R.id.theme_4) {
+            Toast.makeText(this, "black", Toast.LENGTH_SHORT).show();
+            Utils.changeToTheme(this,Utils.THEME_BLACK);
+            intent.putExtra("theme","theme_4");
+            TextSetting.theme = 4;
+            return true;
+        }
+
+        if (id == R.id.theme_5) {
+            Toast.makeText(this, "red", Toast.LENGTH_SHORT).show();
+            Utils.changeToTheme(this,Utils.THEME_RED);
+            intent.putExtra("theme","theme_5");
+            TextSetting.theme = 5;
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_main);
-        //add data (if first time)
+
+
         if(CheckAppFirstExecute()) jsonParsing();
 
         //TabLayout
@@ -50,6 +115,17 @@ public class MainActivity extends AppCompatActivity {
         tabs.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
     }
+
+
+
+
+    //액션바 숨기기
+    private void hideActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null)
+            actionBar.hide();
+    }
+
 
     public void jsonParsing()
     {
@@ -102,7 +178,10 @@ public class MainActivity extends AppCompatActivity {
         return !isFirst;
     }
 
+}
 
+class TextSetting{
 
+    public static int theme=0;
 
 }

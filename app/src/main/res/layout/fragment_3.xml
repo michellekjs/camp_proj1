@@ -7,7 +7,7 @@
     android:background="?attr/selectableItemBackground"
     tools:context=".Fragment3"
     android:orientation="vertical"
-    android:layout_margin="10dp">
+    android:padding="20dp">
 
 
     <LinearLayout
@@ -31,7 +31,6 @@
             android:layout_marginEnd="8dp"
             android:gravity="left|center_vertical"
             android:text="Scheduler"
-            android:textColor="#F6A08E"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -67,7 +66,7 @@
             android:layout_height="wrap_content"
             android:text="Edit"
             android:layout_marginRight="5dp"
-            android:backgroundTint="#F6A08E"
+
             android:textColor="@color/white"
             />
 
@@ -76,7 +75,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="Delete"
-            android:backgroundTint="#F6A08E"
+
             android:textColor="@color/white"
             />
 

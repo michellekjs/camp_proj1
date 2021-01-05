@@ -221,7 +221,6 @@ public class Fragment3 extends Fragment {
     class editClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            removeDiary();
             Context context = v.getContext();
             Intent intent = new Intent(context, TextReviseActivity.class);
             intent.putExtra("date", filename);

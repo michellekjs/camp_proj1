@@ -51,6 +51,32 @@ public class TextEditActivity extends  AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (TextSetting.theme==1) {
+            setTheme(R.style.Theme_Camp_proj1);
+
+        }
+        if (TextSetting.theme==2) {
+            //Utils.changeToTheme(this,Utils.THEME_ORANGE);
+            setTheme(R.style.Theme_Camp_proj3);
+
+        }
+        if (TextSetting.theme==3) {
+            //Utils.changeToTheme(this,Utils.THEME_PINK);
+            setTheme(R.style.Theme_Camp_proj4);
+
+        }
+        if (TextSetting.theme==4) {
+            //Utils.changeToTheme(this,Utils.THEME_BLACK);
+            setTheme(R.style.Theme_Camp_proj5);
+        }
+
+        if (TextSetting.theme==5) {
+            //Utils.changeToTheme(this,Utils.THEME_RED);
+            setTheme(R.style.Theme_Camp_proj6);
+
+        }
+
         setContentView(R.layout.postschedule);
         save_Btn=findViewById(R.id.save_Btn);
         contextEditText=findViewById(R.id.contextEditText);
@@ -108,12 +134,13 @@ public class TextEditActivity extends  AppCompatActivity {
 
 
 
-                class BtnOnClick implements View.OnClickListener {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
+            class BtnOnClick implements View.OnClickListener {
+                @Override
+                public void onClick(View v) {
+                    saveDiary(fname + ".txt");
+                    finish();
                 }
+            }
                 BtnOnClick btnOnClick = new BtnOnClick();
                 return_Btn.setOnClickListener(new BtnOnClick());
             }
