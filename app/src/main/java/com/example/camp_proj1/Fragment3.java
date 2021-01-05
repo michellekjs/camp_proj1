@@ -88,8 +88,6 @@ public class Fragment3 extends Fragment {
         cha_Btn.setOnClickListener(new editClickListener());
 
 
-
-
         cal = (CalendarView) view.findViewById(R.id.calendarView);
         diaryTextView = view.findViewById(R.id.diaryTextView);
 
@@ -221,6 +219,7 @@ public class Fragment3 extends Fragment {
     class editClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+
             Context context = v.getContext();
             Intent intent = new Intent(context, TextReviseActivity.class);
             intent.putExtra("date", filename);

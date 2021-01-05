@@ -55,6 +55,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -69,7 +70,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.name.setText(mPersons.get(position).name);
         //holder.number.setText(mPersons.get(position).phoneNumber);
-        holder.imageView.setImageResource(mPersons.get(position).getPhoto());
+        holder.imageView.setImageResource(R.drawable.basic);
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             //ArrayList<UserInfo> list = new ArrayList<UserInfo>();
