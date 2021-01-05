@@ -51,28 +51,28 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.theme_1) {
             Toast.makeText(this, "mint", Toast.LENGTH_SHORT).show();
             Utils.changeToTheme(this,Utils.THEME_DEFAULT);
-            intent.putExtra("theme","theme_1");
+
             TextSetting.theme = 1;
             return true;
         }
         if (id ==R.id.theme_2) {
             Toast.makeText(this, "orange", Toast.LENGTH_SHORT).show();
             Utils.changeToTheme(this,Utils.THEME_ORANGE);
-            intent.putExtra("theme","theme_2");
+
             TextSetting.theme = 2;
             return true;
         }
         if (id == R.id.theme_3) {
             Toast.makeText(this, "pink", Toast.LENGTH_SHORT).show();
             Utils.changeToTheme(this,Utils.THEME_PINK);
-            intent.putExtra("theme","theme_3");
+
             TextSetting.theme = 3;
             return true;
         }
         if (id == R.id.theme_4) {
             Toast.makeText(this, "black", Toast.LENGTH_SHORT).show();
             Utils.changeToTheme(this,Utils.THEME_BLACK);
-            intent.putExtra("theme","theme_4");
+
             TextSetting.theme = 4;
             return true;
         }
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.theme_5) {
             Toast.makeText(this, "red", Toast.LENGTH_SHORT).show();
             Utils.changeToTheme(this,Utils.THEME_RED);
-            intent.putExtra("theme","theme_5");
+
             TextSetting.theme = 5;
             return true;
         }
@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         //탭메뉴를 클릭하면 해당 프래그먼트로 변경-싱크화
         tabs.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
+        //viewPager.setCurrentItem(1);
     }
 
 

@@ -4,7 +4,7 @@
     package="com.example.camp_proj1">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -15,10 +15,11 @@
         android:supportsRtl="true"
 
         android:usesCleartextTraffic="true">
+
+
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/actions" />
-
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -28,12 +29,16 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="kakao407391d6761d133f32dba4c7d5843d99"
-                    android:host="kakaolink" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="kakaolink"
+                    android:scheme="kakao407391d6761d133f32dba4c7d5843d99" />
             </intent-filter>
 
             <meta-data
@@ -68,23 +73,19 @@
 
         </activity>
 
-        <activity android:name=".RecyclerViewClickActivity"></activity>
-        <activity android:name=".GridViewClickActivity">
 
+        <activity android:name=".sharingphoto"
+            tools:ignore="Instantiatable">
+
+            android:parentActivityName=".MainActivity"
         </activity>
 
-        <activity
-            android:name=".Calender"
-            android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".AddNewUserInfo"></activity>
-        <activity android:name=".TextEditActivity" />
-        <activity android:name=".TextReviseActivity"></activity>
+
+
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="407391d6761d133f32dba4c7d5843d99" />
-
     </application>
-
-
 
 </manifest>
