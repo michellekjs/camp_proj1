@@ -58,6 +58,33 @@ public class GridViewClickActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (TextSetting.theme==1) {
+            setTheme(R.style.Theme_Camp_proj1);
+
+        }
+        if (TextSetting.theme==2) {
+            //Utils.changeToTheme(this,Utils.THEME_ORANGE);
+            setTheme(R.style.Theme_Camp_proj3);
+
+        }
+        if (TextSetting.theme==3) {
+            //Utils.changeToTheme(this,Utils.THEME_PINK);
+            setTheme(R.style.Theme_Camp_proj4);
+
+        }
+        if (TextSetting.theme==4) {
+            //Utils.changeToTheme(this,Utils.THEME_BLACK);
+            setTheme(R.style.Theme_Camp_proj5);
+        }
+
+        if (TextSetting.theme==5) {
+            //Utils.changeToTheme(this,Utils.THEME_RED);
+            setTheme(R.style.Theme_Camp_proj6);
+
+        }
+
+
         setContentView(R.layout.gridviewclickevent);
         mPager = (ViewPager) findViewById(R.id.pager);
 

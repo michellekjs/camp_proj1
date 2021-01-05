@@ -9,7 +9,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_margin = "20dp">
         <ImageView
             android:id = "@+id/sampleimage"
             android:layout_margin="100px"
@@ -18,13 +20,14 @@
             android:scaleType="centerCrop"
             android:layout_gravity="center"
             android:src = "@drawable/basic"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp">
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="10dp"
+            >
 
             <ImageView
                 android:layout_width="0dp"
@@ -34,28 +37,30 @@
                 android:maxWidth="25dp"
                 android:maxHeight="25dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/phonenumber"
+                android:src="@drawable/person"
                 tools:ignore="Suspicious0dp" />
 
             <EditText
                 android:id = "@+id/nameText"
-                android:layout_width="0dp"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:inputType="text"
-                android:hint="이름"
+                android:hint="name"
+                android:textSize="6pt"
                 tools:ignore="Suspicious0dp"
+
                 />
 
 
         </LinearLayout>
         <LinearLayout
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp">
+            >
 
             <ImageView
                 android:layout_width="0dp"
@@ -73,17 +78,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:inputType="phone"
-                android:hint="전화번호"/>
+                android:textSize="6pt"
+                android:hint="number"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp">
+            >
 
             <ImageView
                 android:layout_width="0dp"
@@ -102,6 +108,7 @@
                 android:layout_weight="4"
                 android:inputType="textEmailAddress"
                 android:hint="e-mail"
+                android:textSize="6pt"
                 android:singleLine="true"
                 android:imeOptions="actionDone"
                 />
@@ -112,24 +119,30 @@
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_margin="20dp">
+
             <Button
                 android:id = "@+id/save"
-                android:layout_marginLeft="110dp"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "저장"
-                android:textColor="#ffffff"
+                android:text = "Save"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginRight="10dp"
 
                 />
 
             <Button
                 android:id="@+id/cancel"
-                android:layout_marginLeft="20dp"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/purple_200"
-                android:text="취소"/>
+                android:textColor="@color/white"
+                android:text="Cancel"
+                android:textStyle="bold"/>
 
         </LinearLayout>
     </LinearLayout>

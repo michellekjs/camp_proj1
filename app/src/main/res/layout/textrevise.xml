@@ -53,6 +53,7 @@
         android:layout_gravity="end"
         android:text="@string/button_save"
         android:layout_marginTop="30dp"
+        android:textColor="@color/white"
         />
 
     </LinearLayout>

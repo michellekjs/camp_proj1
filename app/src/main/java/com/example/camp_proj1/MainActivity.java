@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_theme, menu);
-        menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.palette));
+        //menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.palette));
         return true;
     }
 

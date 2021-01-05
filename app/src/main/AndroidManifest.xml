@@ -68,17 +68,6 @@
 
         </activity>
 
-        <activity android:name=".RecyclerViewClickActivity"></activity>
-        <activity android:name=".GridViewClickActivity">
-
-        </activity>
-
-        <activity
-            android:name=".Calender"
-            android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".AddNewUserInfo"></activity>
-        <activity android:name=".TextEditActivity" />
-        <activity android:name=".TextReviseActivity"></activity>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="407391d6761d133f32dba4c7d5843d99" />

@@ -66,7 +66,7 @@ public class Fragment1 extends Fragment {
         
 
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(), 0));
 
         recyclerView.setHasFixedSize(true);
